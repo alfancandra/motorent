@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MotorController;
+use App\Http\Controllers\SewaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +18,12 @@ use App\Http\Controllers\MotorController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('motor', MotorController::class);
+Route::get('login', [LoginController::class, 'index'])->name('login.index');
+Route::post('login', [LoginController::class, 'login'])->name('login.store');
+
+Route::group(['middleware' => ["UserLogin"], 'as' => 'login.'], function () {
+
+    Route::resource('motor', MotorController::class);
+    Route::resource('sewa', SewaController::class);
+
+});

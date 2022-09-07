@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Motor extends Model
 {
     use HasFactory;
+
+    public function sewa()
+    {
+        return $this->hasMany(Sewa::class, 'id_motor', 'id');
+    }
 }

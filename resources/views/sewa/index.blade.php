@@ -49,37 +49,57 @@
                                 </div>
                                 <div class="modal-body">
                                     <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                    <form action="{{ route('login.motor.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('login.sewa.store') }}" method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Nama Motor</label>
-                                                    <input id="addName" type="text" name="nama" class="form-control" placeholder="Nama Motor">
+                                                    <label>Nama Lengkap</label>
+                                                    <input id="addName" type="text" name="nama_lengkap" class="form-control" placeholder="Nama Lengkap">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 pr-0">
                                                 <div class="form-group form-group-default">
-                                                    <label>Stok</label>
-                                                    <input id="addPosition" type="number" name="stok" class="form-control" placeholder="Stok motor">
+                                                    <label>Hp</label>
+                                                    <input id="addPosition" type="number" name="hp" class="form-control" placeholder="Nomor Hp">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-group-default">
-                                                    <label>Harga</label>
-                                                    <input id="addOffice" type="number" name="harga" class="form-control" placeholder="Harga sewa">
+                                                    <label>Alamat</label>
+                                                    <input id="addOffice" type="text" name="alamat" class="form-control" placeholder="Alamat">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Jenis</label>
-                                                    <input id="addName" type="text" name="jenis" class="form-control" placeholder="Jenis">
+                                                    <label>Motor</label>
+                                                    <select class="form-control form-control" name="id_motor" id="defaultSelect">
+                                                        @foreach($motor as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Foto</label>
-                                                    <input id="addName" name="img" type="file" class="form-control" placeholder="Foto">
+                                                    <label>Tanggal Mulai</label>
+                                                    <input id="addName" name="tanggal_mulai" type="date" class="form-control" placeholder="Tanggal Mulai">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>Tanggal Selesai</label>
+                                                    <input id="addName" name="tanggal_selesai" type="date" class="form-control" placeholder="Tanggal Selesai">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>Jaminan</label>
+                                                    <select class="form-control form-control" name="jaminan" id="defaultSelect">
+                                                        <option value="KTP">KTP</option>
+                                                        <option value="KK">KK</option>
+                                                        <option value="NPWP">NPWP</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +116,7 @@
 
                     <!-- Modal edit data -->
                     @if($edit ?? false)
-                    <div class="modal fade show" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header no-bd">
@@ -113,38 +133,58 @@
                                 </div>
                                 <div class="modal-body">
                                     <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                    <form action="{{ route('login.motor.update',$find->id) }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('login.sewa.update',$find->id) }}" method="post">
                                         @method('PUT')
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Nama Motor</label>
-                                                    <input id="addName" type="text" name="nama" value="{{ $find->nama }}" class="form-control" placeholder="Nama Motor">
+                                                    <label>Nama Lengkap</label>
+                                                    <input id="addName" type="text" name="nama_lengkap" value="{{ $find->nama_lengkap }}" class="form-control" placeholder="Nama Lengkap">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 pr-0">
                                                 <div class="form-group form-group-default">
-                                                    <label>Stok</label>
-                                                    <input id="addPosition" type="number" name="stok" value="{{ $find->stok }}" class="form-control" placeholder="Stok motor">
+                                                    <label>Hp</label>
+                                                    <input id="addPosition" type="number" name="hp" value="{{ $find->hp }}" class="form-control" placeholder="Nomor Hp">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-group-default">
-                                                    <label>Harga</label>
-                                                    <input id="addOffice" type="number" name="harga" value="{{ $find->harga }}" class="form-control" placeholder="Harga sewa">
+                                                    <label>Alamat</label>
+                                                    <input id="addOffice" type="text" name="alamat" value="{{ $find->alamat }}" class="form-control" placeholder="Alamat">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Jenis</label>
-                                                    <input id="addName" type="text" name="jenis" value="{{ $find->jenis }}" class="form-control" placeholder="Jenis">
+                                                    <label>Motor</label>
+                                                    <select class="form-control form-control" name="id_motor" id="defaultSelect">
+                                                        @foreach($motor as $item)
+                                                        <option value="{{ $item->id }}" {{ $find->id_motor == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label>Foto</label>
-                                                    <input id="addName" name="img" type="file" class="form-control" placeholder="Foto">
+                                                    <label>Tanggal Mulai</label>
+                                                    <input id="addName" name="tanggal_mulai" value="{{ $find->tanggal_mulai }}" type="date" class="form-control" placeholder="Tanggal Mulai">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>Tanggal Selesai</label>
+                                                    <input id="addName" name="tanggal_selesai" value="{{ $find->tanggal_selesai }}" type="date" class="form-control" placeholder="Tanggal Selesai">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>Jaminan</label>
+                                                    <select class="form-control form-control" name="jaminan" id="defaultSelect">
+                                                        <option {{ $find->jaminan == 'KTP' ? 'selected' : '' }} value="KTP">KTP</option>
+                                                        <option {{ $find->jaminan == 'KK' ? 'selected' : '' }} value="KK">KK</option>
+                                                        <option {{ $find->jaminan == 'NPWP' ? 'selected' : '' }} value="NPWP">NPWP</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,26 +204,33 @@
                         <table id="add-row" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
+                                    <th style="width: 2% !important">No</th>
                                     <th>Nama</th>
-                                    <th>Jenis</th>
-                                    <th>Harga</th>
-                                    <th>Foto</th>
-                                    <th style="width: 10%">Action</th>
+                                    <th>Hp</th>
+                                    <th>Motor</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th style="width: 2% !important">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php 
+                                $no = 1;
+                                @endphp
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $item['nama'] }}</td>
-                                    <td>{{ $item['jenis'] }}</td>
-                                    <td>{{ $item['harga'] }}</td>
-                                    <td><img width="100" src="{{ asset('images/'.$item['img']) }}"></td>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item['nama_lengkap'] }}</td>
+                                    <td>{{ $item['hp'] }}</td>
+                                    <td>{{ $item['motor']['nama'] }}</td>
+                                    <td>{{ $item['tanggal_mulai'] }}</td>
+                                    <td>{{ $item['tanggal_selesai'] }}</td>
                                     <td>
                                         <div class="form-button-action">
-                                            <a href="{{ route('login.motor.edit',$item['id']) }}" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                            <a href="{{ route('login.sewa.edit',$item['id']) }}" class="btn btn-link btn-primary btn-md" data-original-title="Edit Task">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('login.motor.destroy',$item['id']) }}" method="post">
+                                            <form action="{{ route('login.sewa.destroy',$item['id']) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                             <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-link btn-danger" data-original-title="Remove">

@@ -56,9 +56,9 @@ class MotorController extends Controller
         $data['harga'] = $request->harga;
         $data['jenis'] = $request->jenis;
         $data['img'] = $imageName;
-        // dd($data);
+        
         $data->save();
-        return redirect()->route('motor.index')
+        return redirect()->route('login.motor.index')
             ->with('success', 'Berhasil Tambah Data');
     }
 
@@ -110,7 +110,7 @@ class MotorController extends Controller
         $data->save();
 
         // redirect
-        return redirect()->route('motor.index')
+        return redirect()->route('login.motor.index')
         ->with('success', 'Berhasil Edit Data');
     }
 
@@ -123,10 +123,15 @@ class MotorController extends Controller
     public function destroy($id)
     {
         $data = Motor::find($id);
-        $data->delete();
-
-        // redirect
-        return redirect()->route('motor.index')
-        ->with('success', 'Berhasil Hapus Data');
+        if($data->sewa->count() > 0){
+            // redirect
+            return redirect()->route('login.motor.index')
+            ->with('success', 'Gagal Hapus Data, terdapat data motor yang digunakan');
+        }else{
+            $data->delete();
+            // redirect
+            return redirect()->route('login.motor.index')
+            ->with('success', 'Berhasil Hapus Data');
+        }
     }
 }
