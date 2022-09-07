@@ -24,6 +24,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h4 class="card-title">Add Row</h4>
+                        <!-- Button Tambah Data -->
                         <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                             <i class="fa fa-plus"></i>
                             Add Row
@@ -31,6 +32,25 @@
                     </div>
                 </div>
                 <div class="card-body">
+
+                    <!-- Message Session Error -->
+                    @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ $message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+
+                    <!-- Message Session Success -->
+                    @if ($message = Session::get('success'))
+                        <div id="alert" class="alert alert-success alert-block mb-3">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ $message }}
+                        </div>
+                    @endif
+
                     <!-- Modal tambah data -->
                     <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">

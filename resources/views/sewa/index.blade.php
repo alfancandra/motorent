@@ -31,6 +31,25 @@
                     </div>
                 </div>
                 <div class="card-body">
+
+                    <!-- Message Session Error -->
+                    @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ $message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+
+                    <!-- Message Session Success -->
+                    @if ($message = Session::get('success'))
+                        <div id="alert" class="alert alert-success alert-block mb-3">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ $message }}
+                        </div>
+                    @endif
+                    
                     <!-- Modal tambah data -->
                     <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">

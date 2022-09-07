@@ -49,7 +49,7 @@ class SewaController extends Controller
             'jaminan' => 'required'
         ]);
         $data = new Sewa();
-
+        // Store Data
         $data['nama_lengkap'] = $request->nama_lengkap;
         $data['hp'] = $request->hp;
         $data['alamat'] = $request->alamat;
@@ -108,7 +108,7 @@ class SewaController extends Controller
             'jaminan' => 'required'
         ]);
         $data = Sewa::find($id);
-
+        // Store Data
         $data['nama_lengkap'] = $request->nama_lengkap;
         $data['hp'] = $request->hp;
         $data['alamat'] = $request->alamat;

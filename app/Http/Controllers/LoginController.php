@@ -11,11 +11,17 @@ use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
+    // Login Page
     public function index()
     {
-        return view('login');
+        if(Auth::check()){
+            return redirect('motor');
+        }else{
+            return view('login');
+        }
     }
     
+    // Login function
     public function login(Request $request)
     {
         // validasi data
@@ -37,10 +43,11 @@ class LoginController extends Controller
         }
     }
 
+    // Logout Function
     public function logout(Request $request)
     {
         $request->session()->flush();
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login.index');
     }
 }

@@ -51,6 +51,7 @@ class MotorController extends Controller
         $imageName = time().'.'.$request->img->extension();  
         $request->img->move(public_path('images'), $imageName);
 
+        // Store Data
         $data['nama'] = $request->nama;
         $data['stok'] = $request->stok;
         $data['harga'] = $request->harga;
